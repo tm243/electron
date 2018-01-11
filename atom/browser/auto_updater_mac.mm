@@ -35,7 +35,9 @@ std::string AutoUpdater::GetFeedURL() {
 
 // static
 void AutoUpdater::SetFeedURL(const std::string& feed,
-                             const HeaderMap& requestHeaders) {
+                             const HeaderMap& requestHeaders,
+                             const std::string& forVersion) {
+
   Delegate* delegate = GetDelegate();
   if (!delegate)
     return;
@@ -55,7 +57,11 @@ void AutoUpdater::SetFeedURL(const std::string& feed,
 
   // Initialize the SQRLUpdater.
   @try {
-    g_updater = [[SQRLUpdater alloc] initWithUpdateRequest:urlRequest];
+    if(forVersion.empty()) {
+      g_updater = [[SQRLUpdater alloc] initWithUpdateRequest:urlRequest];
+    } else {
+      g_updater = [[SQRLUpdater alloc] initWithUpdateRequest:urlRequest forVersion:@(forVersion.c_str())];
+    }
   } @catch (NSException* error) {
     delegate->OnError(base::SysNSStringToUTF8(error.reason));
     return;

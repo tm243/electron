@@ -54,7 +54,8 @@ class AutoUpdater {
 
   static std::string GetFeedURL();
   static void SetFeedURL(const std::string& url,
-                         const HeaderMap& requestHeaders);
+                         const HeaderMap& requestHeaders,
+                         const std::string& forVersion);
   static void CheckForUpdates();
   static void QuitAndInstall();
 

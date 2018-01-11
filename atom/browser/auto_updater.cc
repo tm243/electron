@@ -22,7 +22,8 @@ std::string AutoUpdater::GetFeedURL() {
 }
 
 void AutoUpdater::SetFeedURL(const std::string& url,
-                             const HeaderMap& requestHeaders) {
+                             const HeaderMap& requestHeaders
+                             const std::string& forVersion) {
 }
 
 void AutoUpdater::CheckForUpdates() {
